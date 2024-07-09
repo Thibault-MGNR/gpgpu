@@ -13,6 +13,8 @@
 #include "GPGPU/graphicShader.hpp"
 #include "GPGPU/computeShader.hpp"
 
+#include "GPGPU/quadRenderer.hpp"
+
 #include <iostream>
 
 void renderQuad();
@@ -46,6 +48,8 @@ int main()
 	Texture texture(textParam);
 	texture.bind();
 
+	QuadRenderer qRenderer;
+
 	while (window.isNotClosed())
 	{	
 		computeShader.use();
@@ -57,7 +61,7 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		screenQuad.use();
 		
-		renderQuad();
+		qRenderer.renderQuad();
 
 		window.update();
 	}
@@ -66,32 +70,4 @@ int main()
 	glDeleteProgram(computeShader.ID);
 
 	return EXIT_SUCCESS;
-}
-
-unsigned int quadVAO = 0;
-unsigned int quadVBO;
-void renderQuad()
-{
-	if (quadVAO == 0)
-	{
-		float quadVertices[] = {
-			// positions        // texture Coords
-			-1.0f,  1.0f, 0.0f, 0.0f, 1.0f,
-			-1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
-			 1.0f,  1.0f, 0.0f, 1.0f, 1.0f,
-			 1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
-		};
-		glGenVertexArrays(1, &quadVAO);
-		glGenBuffers(1, &quadVBO);
-		glBindVertexArray(quadVAO);
-		glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
-		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
-	}
-	glBindVertexArray(quadVAO);
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-	glBindVertexArray(0);
 }
