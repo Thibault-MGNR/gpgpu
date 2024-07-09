@@ -10,8 +10,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "GPGPU/shader.hpp"
-#include "GPGPU/compute_shader.hpp"
+#include "GPGPU/graphicShader.hpp"
+#include "GPGPU/computeShader.hpp"
 
 #include <iostream>
 
@@ -35,7 +35,7 @@ int main()
 	}	
 	glGetIntegerv(GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS, &max_compute_work_group_invocations);
 	
-	Shader screenQuad("../src/shaders/vertex_shader.vs", "../src/shaders/fragment_shader.fs");
+	GraphicShader screenQuad("../src/shaders/vertexShader.vs", "../src/shaders/fragmentShader.fs");
 	ComputeShader computeShader("../src/shaders/computeShader.cs");
 
 	screenQuad.use();
