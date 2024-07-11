@@ -19,6 +19,6 @@ class Texture{
 		void bind();
 	
 	private:
-		unsigned int index;
-		TextureParam parameters;
+		unsigned int _index;
+		TextureParam _parameters;
 };

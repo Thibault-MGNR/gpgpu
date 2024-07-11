@@ -7,7 +7,7 @@ void Shader::use(){
 
 // ------------------------------------------------------------------------
 
-void Shader::setBool(const std::string &name, bool value) const {         
+void Shader::setBool(const std::string &name, const bool value) const {         
     glUniform1i(glGetUniformLocation(ID, name.c_str()), (int)value); 
 }
 
@@ -19,7 +19,7 @@ void Shader::setInt(const std::string &name, const int value) const {
 
 // ------------------------------------------------------------------------
 
-void Shader::setFloat(const std::string &name, float value) const { 
+void Shader::setFloat(const std::string &name, const float value) const { 
     glUniform1f(glGetUniformLocation(ID, name.c_str()), value); 
 }
 
@@ -31,7 +31,7 @@ void Shader::setVec2(const std::string &name, const glm::vec2 &value) const {
 
 // ------------------------------------------------------------------------
 
-void Shader::setVec2(const std::string &name, float x, float y) const { 
+void Shader::setVec2(const std::string &name, const float x, const float y) const { 
     glUniform2f(glGetUniformLocation(ID, name.c_str()), x, y); 
 }
 
@@ -43,7 +43,7 @@ void Shader::setVec3(const std::string &name, const glm::vec3 &value) const {
 
 // ------------------------------------------------------------------------
 
-void Shader::setVec3(const std::string &name, float x, float y, float z) const { 
+void Shader::setVec3(const std::string &name, const float x, const float y, const float z) const { 
     glUniform3f(glGetUniformLocation(ID, name.c_str()), x, y, z); 
 }
 
@@ -55,7 +55,7 @@ void Shader::setVec4(const std::string &name, const glm::vec4 &value) const {
 
 // ------------------------------------------------------------------------
 
-void Shader::setVec4(const std::string &name, float x, float y, float z, float w) { 
+void Shader::setVec4(const std::string &name, float x, const float y, const float z, const float w) { 
     glUniform4f(glGetUniformLocation(ID, name.c_str()), x, y, z, w); 
 }
 
@@ -79,7 +79,7 @@ void Shader::setMat4(const std::string &name, const glm::mat4 &mat) const {
 
 // ------------------------------------------------------------------------
 
-void Shader::checkCompileErrors(GLuint shader, std::string type){
+void Shader::checkCompileErrors(const GLuint shader, const std::string type){
     GLint success;
     GLchar infoLog[1024];
     if(type != "PROGRAM")
@@ -102,6 +102,32 @@ void Shader::checkCompileErrors(GLuint shader, std::string type){
     }
 }
 
+// ------------------------------------------------------------------------
+
 Shader::~Shader(){
     glDeleteProgram(ID);
+}
+
+// ------------------------------------------------------------------------
+
+std::string Shader::getCode(const GLchar* path){
+	std::string code;
+	std::ifstream file;
+
+	file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+	try {
+		file.open(path);
+		std::stringstream shaderStream;
+
+		shaderStream << file.rdbuf();
+		
+		file.close();
+		
+		code = shaderStream.str();
+	}
+	catch (std::ifstream::failure& e){
+		std::cout << "ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ: " << e.what() << std::endl;
+	}
+
+	return code;
 }

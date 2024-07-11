@@ -17,7 +17,6 @@ class GraphicShader : public Shader{
 		void initProgram();
 	
 	private:
-		std::string getCode(const GLchar* path);
 		unsigned int _vertex, _fragment;
 
 };

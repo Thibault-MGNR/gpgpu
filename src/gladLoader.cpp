@@ -5,6 +5,8 @@
 Glad::Glad(){
 }
 
+// ------------------------------------------------------------------------
+
 void Glad::init(){
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
 		std::cout << "Failed to initialize GLAD" << std::endl;

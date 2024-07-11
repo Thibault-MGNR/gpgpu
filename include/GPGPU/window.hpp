@@ -21,9 +21,9 @@ class Window{
 		float getTime();
 	
 	private:
-		int fCounter;
-		float deltaTime;
-		float lastFrame;
-		GLFWwindow* window;
-		static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+		int _fCounter;
+		float _deltaTime;
+		float _lastFrame;
+		GLFWwindow* _window;
+		static void _framebufferSizeCallBack(GLFWwindow* window, int width, int height);
 };

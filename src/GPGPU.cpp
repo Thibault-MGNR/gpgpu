@@ -4,12 +4,14 @@ GPGPU::GPGPU(){
 
 }
 
+// ------------------------------------------------------------------------
+
 void GPGPU::init(const std::string path){
     for (int idx = 0; idx < 3; idx++) {
-		glGetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_COUNT, idx, &_max_compute_work_group_count[idx]);
-		glGetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_SIZE, idx, &_max_compute_work_group_size[idx]);
+		glGetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_COUNT, idx, &_maxComputeWorkGroupCount[idx]);
+		glGetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_SIZE, idx, &_maxComputeWorkGroupSize[idx]);
 	}	
-	glGetIntegerv(GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS, &_max_compute_work_group_invocations);
+	glGetIntegerv(GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS, &_maxComputeWorkGroupInvocations);
     _cs.init(path.c_str());
 }
 

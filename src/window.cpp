@@ -2,7 +2,11 @@
 #include <GLFW/glfw3.h>
 #include "GPGPU/window.hpp"
 
-Window::Window(){}
+Window::Window(){
+
+}
+
+// ------------------------------------------------------------------------
 
 void Window::init(WindowParam param){
 	glfwInit();
@@ -10,24 +14,24 @@ void Window::init(WindowParam param){
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, param.context_version[0]);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	window = glfwCreateWindow(param.screen_dim[0], param.screen_dim[0], param.title.c_str(), NULL, NULL);
-	if (window == NULL)
+	_window = glfwCreateWindow(param.screen_dim[0], param.screen_dim[0], param.title.c_str(), NULL, NULL);
+	if (_window == NULL)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
 
-	glfwMakeContextCurrent(window);
+	glfwMakeContextCurrent(_window);
 
 	GLFWframebuffersizefun *win;
 	
-	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+	glfwSetFramebufferSizeCallback(_window, _framebufferSizeCallBack);
 	glfwSwapInterval(0);
 
-	fCounter = 0;
-	lastFrame = 0;
-	deltaTime = 0;
+	_fCounter = 0;
+	_lastFrame = 0;
+	_deltaTime = 0;
 }
 
 // ------------------------------------------------------------------------
@@ -38,14 +42,14 @@ Window::~Window(){
 
 // ------------------------------------------------------------------------
 
-void Window::framebuffer_size_callback(GLFWwindow* window, int width, int height){
+void Window::_framebufferSizeCallBack(GLFWwindow* window, int width, int height){
 	glViewport(0, 0, width, height);
 }
 
 // ------------------------------------------------------------------------
 
 int Window::isNotClosed(){
-	return !glfwWindowShouldClose(window);
+	return !glfwWindowShouldClose(_window);
 }
 
 // ------------------------------------------------------------------------
@@ -53,15 +57,15 @@ int Window::isNotClosed(){
 void Window::update(){
 	float currentFrame = glfwGetTime();
 
-	deltaTime = currentFrame - lastFrame;
-	lastFrame = currentFrame;
-	if(fCounter > 500) {
-		std::cout << "FPS: " << 1 / deltaTime << std::endl;
-		fCounter = 0;
+	_deltaTime = currentFrame - _lastFrame;
+	_lastFrame = currentFrame;
+	if(_fCounter > 500) {
+		std::cout << "FPS: " << 1 / _deltaTime << std::endl;
+		_fCounter = 0;
 	} else {
-		fCounter++;
+		_fCounter++;
 	}	
-	glfwSwapBuffers(window);
+	glfwSwapBuffers(_window);
 	glfwPollEvents();
 }
 

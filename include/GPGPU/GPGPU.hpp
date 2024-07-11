@@ -17,7 +17,7 @@ class GPGPU{
 
         void init(const std::string path);
         void run();
-        void setRenderView(glm::vec2 target_dim, const int unit);
+        void setRenderView(const glm::vec2 target_dim, const int unit);
         // virtual void renderFrame() = 0;
     
     private:
@@ -31,7 +31,7 @@ class GPGPU{
         QuadRenderer _qRenderer;
         bool _hasRenderView;
 
-        int _max_compute_work_group_count[3];
-        int _max_compute_work_group_size[3];
-        int _max_compute_work_group_invocations;
+        int _maxComputeWorkGroupCount[3];
+        int _maxComputeWorkGroupSize[3];
+        int _maxComputeWorkGroupInvocations;
 };

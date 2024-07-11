@@ -13,7 +13,7 @@ class QuadRenderer {
     private:
         VAO _vao;
         VBO _vbo;
-        float quadVertices[5*4] = {
+        float _quadVertices[5*4] = {
 			// positions        // texture Coords
 			-1.0f,  1.0f, 0.0f, 0.0f, 1.0f,
 			-1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
