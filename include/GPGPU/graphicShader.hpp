@@ -11,7 +11,14 @@
 
 class GraphicShader : public Shader{
 	public:
-		GraphicShader(const GLchar* vertexPath, const GLchar* fragmentPath);
-};
+		GraphicShader();
+		void initVertexShader(const GLchar* vertexPath);
+		void initFragmentShader(const GLchar* fragmentPath);
+		void initProgram();
+	
+	private:
+		std::string getCode(const GLchar* path);
+		unsigned int _vertex, _fragment;
 
+};
 #endif

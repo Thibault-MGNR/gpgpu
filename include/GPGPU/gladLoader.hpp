@@ -4,4 +4,5 @@
 class Glad{
 	public:
 		Glad();
+		void init();
 };

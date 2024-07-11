@@ -2,7 +2,9 @@
 #include <GLFW/glfw3.h>
 #include "GPGPU/window.hpp"
 
-Window::Window(WindowParam param){
+Window::Window(){}
+
+void Window::init(WindowParam param){
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, param.context_version[0]);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, param.context_version[0]);

@@ -4,17 +4,23 @@
 #include <glm/glm.hpp>
 
 VAO::VAO(){
-	glGenVertexArrays(1, &index);
+	
+}
+
+// ------------------------------------------------------------------------
+
+void VAO::init(){
+	glGenVertexArrays(1, &_index);
 }
 
 // ------------------------------------------------------------------------
 
 VAO::~VAO(){
-	glDeleteVertexArrays(1, &index);
+	glDeleteVertexArrays(1, &_index);
 }
 
 // ------------------------------------------------------------------------
 
 void VAO::bind(){
-	glBindVertexArray(index);
+	glBindVertexArray(_index);
 }

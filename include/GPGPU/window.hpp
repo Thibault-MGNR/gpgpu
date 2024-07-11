@@ -13,8 +13,9 @@ struct WindowParam {
 
 class Window{
 	public:
-        Window(WindowParam param);
+        Window();
 		~Window();
+		void init(WindowParam param);
 		int isNotClosed();
 		void update();
 		float getTime();

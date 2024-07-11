@@ -2,8 +2,15 @@
 #include <glad/glad.h>
 
 QuadRenderer::QuadRenderer(){
-    vao.bind();
-    vbo.bind();
+    
+}
+
+void QuadRenderer::init(){
+    _vao.init();
+    _vbo.init();
+    
+    _vao.bind();
+    _vbo.bind();
 
     glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
     glEnableVertexAttribArray(0);
@@ -13,7 +20,7 @@ QuadRenderer::QuadRenderer(){
 }
 
 void QuadRenderer::renderQuad(){
-    vao.bind();
+    _vao.bind();
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	glBindVertexArray(0);
 }

@@ -1,6 +1,12 @@
 #include "GPGPU/computeShader.hpp"
 
-ComputeShader::ComputeShader(const char* computePath){
+ComputeShader::ComputeShader(){
+    
+}
+
+// ------------------------------------------------------------------------
+
+void ComputeShader::init(const char* computePath){
     // 1. retrieve the vertex/fragment source code from filePath
     std::string computeCode;
     std::ifstream cShaderFile;

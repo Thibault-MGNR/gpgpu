@@ -1,7 +1,18 @@
 #include "GPGPU/texture.hpp"
 #include <iostream>
 
-Texture::Texture(TextureParam param): parameters(param){
+Texture::Texture(){
+	
+}
+
+// ------------------------------------------------------------------------
+
+Texture::~Texture(){
+	glDeleteTextures(1, &index);
+}
+
+void Texture::init(TextureParam param){
+	parameters = param;
 	glGenTextures(1, &index);
 	glActiveTexture(parameters.unit);
 	glBindTexture(GL_TEXTURE_2D, index);
@@ -13,12 +24,6 @@ Texture::Texture(TextureParam param): parameters(param){
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, parameters.dimension[0], parameters.dimension[1], 0, GL_RGBA, GL_FLOAT, NULL);
 	
 	glBindImageTexture(parameters.unit - GL_TEXTURE0, index, 0, GL_FALSE, 0, GL_READ_WRITE, GL_RGBA32F);
-}
-
-// ------------------------------------------------------------------------
-
-Texture::~Texture(){
-	glDeleteTextures(1, &index);
 }
 
 // ------------------------------------------------------------------------

@@ -13,6 +13,7 @@
 
 class ComputeShader : public Shader{
     public:
-        ComputeShader(const char* computePath);
+        ComputeShader();
+        void init(const char* computePath);
 };
 #endif

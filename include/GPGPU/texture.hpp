@@ -13,8 +13,9 @@ class TextureParam{
 
 class Texture{
 	public:
-		Texture(TextureParam param);
+		Texture();
 		~Texture();
+		void init(TextureParam param);
 		void bind();
 	
 	private:
