@@ -12,6 +12,7 @@
 class GraphicShader : public Shader{
 	public:
 		GraphicShader();
+		~GraphicShader();
 		void initVertexShader();
 		void initFragmentShader();
 		void initProgram();

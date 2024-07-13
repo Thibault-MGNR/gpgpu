@@ -14,6 +14,8 @@
 class ComputeShader : public Shader{
     public:
         ComputeShader();
+        ~ComputeShader();
+        
         void init(const char* computePath);
 };
 #endif

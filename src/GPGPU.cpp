@@ -6,13 +6,12 @@ GPGPU::GPGPU(){
 
 // ------------------------------------------------------------------------
 
-void GPGPU::initComputeShader(const std::string path){
+void GPGPU::initGPGPU(){
     for (int idx = 0; idx < 3; idx++) {
 		glGetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_COUNT, idx, &_maxComputeWorkGroupCount[idx]);
 		glGetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_SIZE, idx, &_maxComputeWorkGroupSize[idx]);
 	}	
 	glGetIntegerv(GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS, &_maxComputeWorkGroupInvocations);
-    _cs.init(path.c_str());
 }
 
 // ------------------------------------------------------------------------
@@ -23,16 +22,11 @@ void GPGPU::run(){
 	while (_window.isNotClosed())
 	{	
 		renderFrame();
-		if(_hasRenderView){
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			_gs.use();
-			_qRenderer.renderQuad();
-			_window.update();
-		}
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		_gs.use();
+		_qRenderer.renderQuad();
+		_window.update();
 	}
-
-	glDeleteProgram(_gs.ID);
-	glDeleteProgram(_cs.ID);
 }
 
 // ------------------------------------------------------------------------

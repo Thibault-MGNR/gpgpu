@@ -5,7 +5,8 @@ class App: public GPGPU {
 		void init(){
 			setRenderView({1000.f, 1000.f}, 2);
 
-			initComputeShader("../src/shaders/computeShader.cs");
+			initGPGPU();
+			_cs.init("../src/shaders/computeShader.glsl");
 		}
 
 		~App() {
@@ -20,6 +21,8 @@ class App: public GPGPU {
 
 			glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);
 		}
+
+		ComputeShader _cs;
 };
 
 int main()

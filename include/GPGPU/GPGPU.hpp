@@ -14,14 +14,13 @@ class GPGPU{
     public:
         GPGPU();
 
-        void initComputeShader(const std::string path);
         void run();
-        void setRenderView(const glm::vec2 target_dim, const int unit);
-        virtual void renderFrame() = 0;
     
     protected:
+        void initGPGPU();
+        void setRenderView(const glm::vec2 target_dim, const int unit);
+        virtual void renderFrame() = 0;
         Window _window;
-        ComputeShader _cs;
 
     private:
         WindowParam _param;

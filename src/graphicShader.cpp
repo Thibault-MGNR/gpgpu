@@ -53,3 +53,9 @@ void GraphicShader::initFragmentShader(){
 	glCompileShader(_fragment);
 	checkCompileErrors(_fragment, "FRAGMENT");
 }
+
+// ------------------------------------------------------------------------
+
+GraphicShader::~GraphicShader(){
+	glDeleteProgram(ID);
+}

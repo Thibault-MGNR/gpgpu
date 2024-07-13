@@ -27,3 +27,9 @@ void ComputeShader::init(const char* computePath){
     // delete the shaders as they're linked into our program now and no longer necessary
     glDeleteShader(compute);
 }
+
+// ------------------------------------------------------------------------
+
+ComputeShader::~ComputeShader(){
+    glDeleteProgram(ID);
+}
