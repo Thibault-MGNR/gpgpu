@@ -15,5 +15,6 @@ void main() {
 
     value.x = mod(float(texelCoord.x) + t * speed, width) / (gl_NumWorkGroups.x * gl_WorkGroupSize.x);
     value.y = float(texelCoord.y)/(gl_NumWorkGroups.y*gl_WorkGroupSize.y);
+
     imageStore(imgOutput, texelCoord, value);
 }

@@ -12,8 +12,8 @@
 class GraphicShader : public Shader{
 	public:
 		GraphicShader();
-		void initVertexShader(const GLchar* vertexPath);
-		void initFragmentShader(const GLchar* fragmentPath);
+		void initVertexShader();
+		void initFragmentShader();
 		void initProgram();
 	
 	private:

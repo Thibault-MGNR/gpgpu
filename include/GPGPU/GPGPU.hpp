@@ -13,22 +13,23 @@
 class GPGPU{
     public:
         GPGPU();
-        // virtual ~GPGPU() = 0;
 
-        void init(const std::string path);
+        void initComputeShader(const std::string path);
         void run();
         void setRenderView(const glm::vec2 target_dim, const int unit);
-        // virtual void renderFrame() = 0;
+        virtual void renderFrame() = 0;
     
+    protected:
+        Window _window;
+        ComputeShader _cs;
+
     private:
         WindowParam _param;
-        Window _window;
-        Glad _glad;
-        ComputeShader _cs;
         GraphicShader _gs;
+        QuadRenderer _qRenderer;
+        Glad _glad;
         TextureParam _textureParam;
         Texture _texture;
-        QuadRenderer _qRenderer;
         bool _hasRenderView;
 
         int _maxComputeWorkGroupCount[3];

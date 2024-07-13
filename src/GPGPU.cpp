@@ -1,12 +1,12 @@
 #include "GPGPU/GPGPU.hpp"
 
 GPGPU::GPGPU(){
-
+	_hasRenderView = false;
 }
 
 // ------------------------------------------------------------------------
 
-void GPGPU::init(const std::string path){
+void GPGPU::initComputeShader(const std::string path){
     for (int idx = 0; idx < 3; idx++) {
 		glGetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_COUNT, idx, &_maxComputeWorkGroupCount[idx]);
 		glGetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_SIZE, idx, &_maxComputeWorkGroupSize[idx]);
@@ -22,18 +22,13 @@ void GPGPU::run(){
 
 	while (_window.isNotClosed())
 	{	
-		_cs.use();
-		_cs.setFloat("t", _window.getTime());
-		glDispatchCompute((unsigned int)1000/8, (unsigned int)1000/8, 1);
-
-		glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);
-
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		_gs.use();
-		
-		_qRenderer.renderQuad();
-
-		_window.update();
+		renderFrame();
+		if(_hasRenderView){
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			_gs.use();
+			_qRenderer.renderQuad();
+			_window.update();
+		}
 	}
 
 	glDeleteProgram(_gs.ID);
@@ -46,9 +41,10 @@ void GPGPU::setRenderView(glm::vec2 target_dim, const int unit){
     _param.screen_dim[0] = int(target_dim.x);
     _param.screen_dim[1] = int(target_dim.y);
 	_window.init(_param);
+	_hasRenderView = true;
     _glad.init();
-    _gs.initVertexShader("../src/shaders/vertexShader.vs");
-    _gs.initFragmentShader("../src/shaders/fragmentShader.fs");
+    _gs.initVertexShader();
+    _gs.initFragmentShader();
     _gs.initProgram();
     _gs.use();
 	_gs.setInt("tex", unit);
