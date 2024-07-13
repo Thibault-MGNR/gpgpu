@@ -8,7 +8,8 @@ set(CMAKE_C_COMPILER "C:/msys64/mingw64/bin/gcc.exe" )
 project(GPGPU)
 
 file(GLOB_RECURSE SOURCES src/*.cpp src/*.c)
-add_executable(${CMAKE_PROJECT_NAME} ${SOURCES})
+# add_executable(${CMAKE_PROJECT_NAME} ${SOURCES})
+add_library(${CMAKE_PROJECT_NAME} ${SOURCES})
 
 find_package(glfw3 REQUIRED)
 find_package(OpenGL REQUIRED)
@@ -24,3 +25,5 @@ target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC
 target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/include/"
 )
+
+add_subdirectory(test)

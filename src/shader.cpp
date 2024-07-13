@@ -1,6 +1,5 @@
 #include "GPGPU/shader.hpp"
 
-
 void Shader::use(){
     glUseProgram(ID); 
 }
