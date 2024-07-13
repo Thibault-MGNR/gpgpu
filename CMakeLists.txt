@@ -9,21 +9,21 @@ project(GPGPU)
 
 file(GLOB_RECURSE SOURCES src/*.cpp src/*.c)
 # add_executable(${CMAKE_PROJECT_NAME} ${SOURCES})
-add_library(${CMAKE_PROJECT_NAME} ${SOURCES})
+add_library(GPGPU ${SOURCES})
 
 find_package(glfw3 REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(glm REQUIRED)
 
 
-target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC
+target_link_libraries(GPGPU PUBLIC
     OpenGL::GL
     glfw
     glm::glm
 )
 
-target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC
+target_include_directories(GPGPU PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/include/"
 )
 
-add_subdirectory(test)
+# add_subdirectory(test)

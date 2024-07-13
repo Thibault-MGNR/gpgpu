@@ -1,4 +1,4 @@
-#include "GPGPU/GPGPU.hpp"
+#include <GPGPU/GPGPU.hpp>
 
 class App: public GPGPU {
 	public:
