@@ -19,6 +19,8 @@ void GPGPU::initGPGPU(){
 void GPGPU::run(){
     _qRenderer.init();
 
+	beforeRun();
+
 	while (_window.isNotClosed())
 	{	
 		renderFrame();
@@ -27,6 +29,8 @@ void GPGPU::run(){
 		_qRenderer.renderQuad();
 		_window.update();
 	}
+
+	afterRun();
 }
 
 // ------------------------------------------------------------------------
@@ -45,4 +49,22 @@ void GPGPU::setRenderView(glm::vec2 target_dim, const int unit){
 	_textureParam.unit =  GL_TEXTURE0 + unit;
 	_texture.init(_textureParam);
 	_texture.bind();
+}
+
+// ------------------------------------------------------------------------
+
+void GPGPU::beforeRun(){
+
+}
+
+// ------------------------------------------------------------------------
+
+void GPGPU::afterRun(){
+
+}
+
+// ------------------------------------------------------------------------
+
+void GPGPU::renderFrame(){
+
 }

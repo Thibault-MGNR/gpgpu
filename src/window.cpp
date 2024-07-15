@@ -9,10 +9,12 @@ Window::Window(){
 // ------------------------------------------------------------------------
 
 void Window::init(WindowParam param){
+	_windowParameters = param;
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, param.context_version[0]);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, param.context_version[0]);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
 	_window = glfwCreateWindow(param.screen_dim[0], param.screen_dim[0], param.title.c_str(), NULL, NULL);
 	if (_window == NULL)
@@ -27,7 +29,7 @@ void Window::init(WindowParam param){
 	GLFWframebuffersizefun *win;
 	
 	glfwSetFramebufferSizeCallback(_window, _framebufferSizeCallBack);
-	glfwSwapInterval(0);
+	glfwSwapInterval(1);
 
 	_fCounter = 0;
 	_lastFrame = 0;
@@ -73,4 +75,12 @@ void Window::update(){
 
 float Window::getTime(){
 	return glfwGetTime();
+}
+
+// ------------------------------------------------------------------------
+
+glm::vec2 Window::getCurrentCursorPos(){
+	double posX, posY;
+	glfwGetCursorPos(_window, &posX, &posY);
+	return glm::vec2{float(posX), float(_windowParameters.screen_dim[1]) - float(posY)};
 }

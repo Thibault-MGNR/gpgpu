@@ -1,5 +1,6 @@
 #pragma once
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 #include <vector>
 #include <string>
 
@@ -19,8 +20,10 @@ class Window{
 		int isNotClosed();
 		void update();
 		float getTime();
+		glm::vec2 getCurrentCursorPos();
 	
 	private:
+		WindowParam _windowParameters;
 		int _fCounter;
 		float _deltaTime;
 		float _lastFrame;

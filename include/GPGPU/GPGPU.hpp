@@ -10,6 +10,9 @@
 
 #include "GPGPU/quadRenderer.hpp"
 
+#include "GPGPU/UBO.hpp"
+#include "GPGPU/SSBO.hpp"
+
 class GPGPU{
     public:
         GPGPU();
@@ -18,9 +21,13 @@ class GPGPU{
     
     protected:
         void initGPGPU();
+        virtual void beforeRun();
+        virtual void afterRun();
         void setRenderView(const glm::vec2 target_dim, const int unit);
-        virtual void renderFrame() = 0;
+        virtual void renderFrame();
         Window _window;
+        UBO _ubo;
+        SSBO _ssbo;
 
     private:
         WindowParam _param;
