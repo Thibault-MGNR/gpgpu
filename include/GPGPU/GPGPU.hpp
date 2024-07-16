@@ -26,8 +26,6 @@ class GPGPU{
         void setRenderView(const glm::vec2 target_dim, const int unit);
         virtual void renderFrame();
         Window _window;
-        UBO _ubo;
-        SSBO _ssbo;
 
     private:
         WindowParam _param;
