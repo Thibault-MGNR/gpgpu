@@ -12,12 +12,16 @@ class UBO{
         ~UBO(){
             glDeleteBuffers(1, &_ID);
         }
+
+        void setUsage(GLenum usage){
+            _usage = usage;
+        }
     
         template<typename T>
         void init(const T* data, const unsigned int index){
             glGenBuffers(1, &_ID);
             glBindBuffer(GL_UNIFORM_BUFFER, _ID);
-            glBufferData(GL_UNIFORM_BUFFER, sizeof(T), data, GL_STREAM_DRAW);
+            glBufferData(GL_UNIFORM_BUFFER, sizeof(T), data, _usage);
             glBindBufferBase(GL_UNIFORM_BUFFER, index, _ID);
             glBindBuffer(GL_UNIFORM_BUFFER, 0);
         }
@@ -29,4 +33,5 @@ class UBO{
     
     private:
         GLuint _ID;
+        GLenum _usage;
 };
